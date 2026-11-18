@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login Form</title>
+
+<style>
+body {
+    background-color: lightblue;
+    font-family: Arial;
+    text-align: center;
+}
+
+.login {
+    background-color: white;
+    width: 300px;
+    padding: 20px;
+    margin: 100px auto;
+    border-radius: 10px;
+}
+
+input {
+    padding: 10px;
+    margin: 10px;
+    width: 80%;
+}
+
+button {
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    width: 90%;
+    border: none;
+    cursor: pointer;
+}
+
+#strength {
+    font-weight: bold;
+}
+
+#message {
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login">
+
+    <h2>Login Page</h2>
+
+    <form id="loginform">
+
+        <input type="email" id="email"
+        placeholder="Enter Email" required>
+        <br>
+
+        <input type="password" id="password"
+        placeholder="Enter Password" required>
+
+        <p id="strength">Password strength:</p>
+
+        <input type="checkbox" id="show">
+        Show password
+        <br>
+
+        <button type="submit">Login</button>
+
+    </form>
+
+    <p id="message"></p>
+
+</div>
+
+<script>
+
+// Show or hide password
+document.getElementById("show").onclick = function() {
+
+    let pass = document.getElementById("password");
+
+    if (this.checked) {
+        pass.type = "text";
+    }
+    else {
+        pass.type = "password";
+    }
+};
+
+
+// Password strength
+document.getElementById("password").oninput = function() {
+
+    let pass = this.value;
+    let strength = document.getElementById("strength");
+
+    if (pass.length < 6) {
+        strength.innerHTML = "Weak password";
+        strength.style.color = "red";
+    }
+    else if (pass.length < 10) {
+        strength.innerHTML = "Medium password";
+        strength.style.color = "orange";
+    }
+    else {
+        strength.innerHTML = "Strong password";
+        strength.style.color = "green";
+    }
+
+};
+
+
+// Login validation
+document.getElementById("loginform").onsubmit = function(event) {
+
+    event.preventDefault();
+
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    if (email != "" && password != "") {
+
+        document.getElementById("message").style.color = "green";
+        document.getElementById("message").innerHTML = "Login successful";
+
+    }
+    else {
+
+        document.getElementById("message").style.color = "red";
+        document.getElementById("message").innerHTML = "Enter email and password";
+
+    }
+
+};
+
+</script>
+
+</body>
+</html>
